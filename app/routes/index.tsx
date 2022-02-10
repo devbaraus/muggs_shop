@@ -1,11 +1,11 @@
 import { useLoaderData } from 'remix'
-import { ManyProductsResponseType, storefrontAPI } from '~/services/storefront'
+import { ManyProductsResponseType, Storefront } from '~/services/storefront'
 import { queryProducts } from '~/graphql/query'
 import ProductGrid from '~/components/ProductGrid'
 import { Hero } from '~/components/sections/Hero'
 
 export async function loader() {
-	const { data } = await storefrontAPI(queryProducts(6))
+	const { data } = await new Storefront().fetch(queryProducts(6))
 	return data as ManyProductsResponseType
 }
 

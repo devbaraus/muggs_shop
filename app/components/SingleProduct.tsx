@@ -1,7 +1,7 @@
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import { formatPrice } from '~/utils'
-import { SingleProductResponseType, storefrontAPI } from '~/services/storefront'
+import { SingleProductResponseType, Storefront } from '~/services/storefront'
 import { useState } from 'react'
 import { mutationCreateCheckout } from '~/graphql/mutation'
 
@@ -9,20 +9,23 @@ type Props = {
 	data: SingleProductResponseType
 }
 
+
 export default function SingleProduct({ data }: Props) {
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 
 	const { productByHandle: product } = data
 	const image = product.images.edges[0].node
-	const variantID = product.variants?.edges[0].node.id as number
+	const variantId = product.variants?.edges[0].node.id
 
-	async function handleCheckoutProduct(variantID: number, quantity: number = 1) {
+	async function handleCheckoutProduct(variantId: string, quantity: number = 1) {
+		// @ts-ignore
+		const store = new Storefront(window.ENV.STOREFRONT_API_URL, window.ENV.STOREFRONT_ACCESS_TOKEN)
 		setIsLoading(true)
-		const { data } = await storefrontAPI(mutationCreateCheckout(), {
-			variantID, quantity,
+		const { data } = await store.fetch(mutationCreateCheckout(), {
+			variantId, quantity,
 		})
 		const { webUrl } = data.checkoutCreate.checkout
-		// window.open(webUrl, '_blank')?.focus()
+		window.open(webUrl, '_blank')?.focus()
 	}
 
 	return (
@@ -76,7 +79,7 @@ export default function SingleProduct({ data }: Props) {
 					/>
 					<div className='mt-10 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-12'>
 						<button
-							onClick={() => handleCheckoutProduct(variantID)}
+							onClick={() => handleCheckoutProduct(variantId as string)}
 							type='button'
 							className='w-full bg-gray-900 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 col-span-8'
 						>

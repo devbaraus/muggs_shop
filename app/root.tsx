@@ -1,5 +1,5 @@
 import type { MetaFunction } from 'remix'
-import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from 'remix'
+import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData } from 'remix'
 
 import styles from './styles/tailwind.css'
 import Header from '~/components/sections/Header'
@@ -21,7 +21,18 @@ export const meta: MetaFunction = () => {
 	return { title: 'Muggs Shop' }
 }
 
+export async function loader() {
+	return {
+		ENV: {
+			STOREFRONT_API_URL: process.env.STOREFRONT_API_URL,
+			STOREFRONT_ACCESS_TOKEN: process.env.STOREFRONT_ACCESS_TOKEN,
+		},
+	}
+}
+
 export default function App() {
+	const data = useLoaderData()
+
 	return (
 		<html lang='en'>
 		<head>
@@ -33,6 +44,13 @@ export default function App() {
 		<body className='scroll-smooth font-inter'>
 		<Header />
 		<Outlet />
+		<script
+			dangerouslySetInnerHTML={{
+				__html: `window.ENV = ${JSON.stringify(
+					data.ENV,
+				)}`,
+			}}
+		/>
 		<Footer />
 		<ScrollRestoration />
 		<Scripts />

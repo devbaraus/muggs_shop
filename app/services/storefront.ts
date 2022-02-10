@@ -1,21 +1,33 @@
-type ENVProps = {
+type StorefrontConfig = {
 	STOREFRONT_API_URL: string
 	STOREFRONT_ACCESS_TOKEN: string
 }
 
-const ENV = process.env as unknown as ENVProps
+export class Storefront {
+	private config: StorefrontConfig = {
+		STOREFRONT_API_URL: '',
+		STOREFRONT_ACCESS_TOKEN: '',
+	}
 
-export async function storefrontAPI(query: string, variables?: object) {
-	const response = await fetch(ENV.STOREFRONT_API_URL, {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-			'X-Shopify-Storefront-Access-Token': ENV.STOREFRONT_ACCESS_TOKEN,
-		},
-		body: JSON.stringify({ query, variables }),
-	})
+	public constructor(API_URL: string = '', ACCESS_TOKEN: string = '') {
+		this.config = {
+			STOREFRONT_API_URL: API_URL || process.env.STOREFRONT_API_URL as string,
+			STOREFRONT_ACCESS_TOKEN: ACCESS_TOKEN || process.env.STOREFRONT_ACCESS_TOKEN as string,
+		}
+	}
 
-	return response.json()
+	async fetch(query: string, variables?: object) {
+		const response = await fetch(this.config.STOREFRONT_API_URL, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-Shopify-Storefront-Access-Token': this.config.STOREFRONT_ACCESS_TOKEN,
+			},
+			body: JSON.stringify({ query, variables }),
+		})
+
+		return response.json()
+	}
 }
 
 export type SingleProduct = {
@@ -39,7 +51,7 @@ export type SingleProduct = {
 
 export type ProductVariantType = {
 	node: {
-		id: number
+		id: string
 	}
 }
 

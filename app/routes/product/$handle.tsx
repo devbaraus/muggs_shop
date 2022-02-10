@@ -1,15 +1,18 @@
 import { LoaderFunction, useLoaderData } from 'remix'
-import { ManyProductsResponseType, ProductNodeType, storefrontAPI } from '~/services/storefront'
+import { ManyProductsResponseType, ProductNodeType, Storefront } from '~/services/storefront'
 import { queryProducts, querySingleProduct } from '~/graphql/query'
 import SingleProduct from '~/components/SingleProduct'
 import ProductGrid from '~/components/ProductGrid'
 import { Link } from '@remix-run/react'
 
 export const loader: LoaderFunction = async ({ params }) => {
-	const { data: singleProduct } = await storefrontAPI(querySingleProduct(), {
-		handle: params.handle,
-	})
-	const { data: products } = await storefrontAPI(queryProducts(7))
+	const store = new Storefront()
+	const { data: singleProduct } = await store.fetch(
+		querySingleProduct(),
+		{
+			handle: params.handle,
+		})
+	const { data: products } = await store.fetch(queryProducts(7))
 
 	return { singleProduct, products }
 }
