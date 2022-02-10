@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react'
+import { createContext } from 'react'
 
 type ContextProps = {
 	title: string
@@ -12,10 +12,10 @@ interface Props extends ContextProps {
 }
 
 export function SiteProvider({
-	title = 'Brand',
-	slogan = 'Buy your stuff right here.',
-	children,
-}: Props) {
+															 title = 'Brand',
+															 slogan = 'Buy your stuff right here.',
+															 children,
+														 }: Props) {
 	return (
 		<>
 			<SiteContext.Provider value={{ title, slogan }}>

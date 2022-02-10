@@ -5,7 +5,7 @@ import ProductGrid from '~/components/ProductGrid'
 import { Hero } from '~/components/sections/Hero'
 
 export async function loader() {
-	const { data } = await storefrontAPI(queryProducts)
+	const { data } = await storefrontAPI(queryProducts(6))
 	return data as ManyProductsResponseType
 }
 
@@ -14,10 +14,10 @@ export default function Index() {
 
 	return (
 		<>
-			<main className="mt-24 px-4 sm:mt-32">
+			<main className='mt-24 px-4 sm:mt-32'>
 				<Hero />
-				<div className="max-w-2xl mx-auto pt-24 px-4 sm:pt-32 sm:px-6 lg:max-w-7xl lg:px-8">
-					<h2 id="products-heading">Products</h2>
+				<div className='max-w-2xl mx-auto pt-24 px-4 sm:pt-32 sm:px-6 lg:max-w-7xl lg:px-8'>
+					<h2 id='products-heading'>Products</h2>
 					<ProductGrid data={data} />
 				</div>
 			</main>
