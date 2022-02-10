@@ -32,6 +32,15 @@ export type SingleProduct = {
 	images: {
 		edges: ProductItemImageType[]
 	}
+	variants?: {
+		edges: ProductVariantType[]
+	}
+}
+
+export type ProductVariantType = {
+	node: {
+		id: number
+	}
 }
 
 export type ProductNodeType = {

@@ -1,12 +1,8 @@
-import { useContext } from 'react'
-import { SiteContext } from '~/context/SiteContext'
 import { Link } from '@remix-run/react'
 
 type Props = {}
 
 export default function Header({}: Props) {
-	const siteContext = useContext(SiteContext)
-
 	return (
 		<>
 			<header className='max-w-7xl mx-auto sm:px-6 lg:px-8'>

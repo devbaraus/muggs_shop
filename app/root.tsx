@@ -4,8 +4,6 @@ import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from 'rem
 import styles from './styles/tailwind.css'
 import Header from '~/components/sections/Header'
 import { Footer } from '~/components/sections/Footer'
-import { SiteContext, SiteProvider } from '~/context/SiteContext'
-import { useContext } from 'react'
 
 export function links() {
 	return [
@@ -20,8 +18,7 @@ export function links() {
 }
 
 export const meta: MetaFunction = () => {
-	const siteContext = useContext(SiteContext)
-	return { title: siteContext.title }
+	return { title: 'Muggs Shop' }
 }
 
 export default function App() {
@@ -34,14 +31,9 @@ export default function App() {
 			<Links />
 		</head>
 		<body className='scroll-smooth font-inter'>
-		<SiteProvider
-			title='Muggs Shop'
-			slogan='Compre as canecas mais legais aqui!'
-		>
-			<Header />
-			<Outlet />
-			<Footer />
-		</SiteProvider>
+		<Header />
+		<Outlet />
+		<Footer />
 		<ScrollRestoration />
 		<Scripts />
 		{process.env.NODE_ENV === 'development' && <LiveReload />}

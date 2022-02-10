@@ -49,6 +49,13 @@ export const querySingleProduct = (countImages: number = 6) => gql`
                     }
                 }
             }
+            variants(first:1) {
+                edges {
+                    node {
+                        id
+                    }
+                }
+            }
         }
     }
 `
