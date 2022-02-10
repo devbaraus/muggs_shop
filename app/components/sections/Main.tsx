@@ -1,9 +1,8 @@
-import { Link } from '@remix-run/react'
-import { ProductItemResponseType } from '~/services/storefront'
+import { ManyProductsResponseType } from '~/services/storefront'
 import { useEffect } from 'react'
 
 type Props = {
-	products: ProductItemResponseType
+	products: ManyProductsResponseType
 }
 
 export default function Main({ products }: Props) {

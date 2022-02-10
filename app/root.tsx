@@ -1,24 +1,27 @@
 import type { MetaFunction } from 'remix'
-import {
-	Links,
-	LiveReload,
-	Meta,
-	Outlet,
-	Scripts,
-	ScrollRestoration,
-} from 'remix'
+import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from 'remix'
 
 import styles from './styles/tailwind.css'
 import Header from '~/components/sections/Header'
 import { Footer } from '~/components/sections/Footer'
-import { SiteProvider } from '~/context/SiteContext'
+import { SiteContext, SiteProvider } from '~/context/SiteContext'
+import { useContext } from 'react'
 
 export function links() {
-	return [{ rel: 'stylesheet', href: styles }]
+	return [
+		{ rel: 'stylesheet', href: styles },
+		{ rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+		{ rel: 'preconnect', href: 'https://fonts.gstatic.com' },
+		{
+			rel: 'stylesheet',
+			href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap',
+		},
+	]
 }
 
 export const meta: MetaFunction = () => {
-	return { title: 'New Remix App' }
+	const siteContext = useContext(SiteContext)
+	return { title: siteContext.title }
 }
 
 export default function App() {
@@ -30,7 +33,7 @@ export default function App() {
 				<Meta />
 				<Links />
 			</head>
-			<body className="scroll-smooth bg-white text-gray-600 work-sans leading-normal text-base tracking-normal">
+			<body className="scroll-smooth font-inter">
 				<SiteProvider
 					title="Muggs Shop"
 					slogan="Compre as canecas mais legais aqui!"

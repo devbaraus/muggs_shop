@@ -18,20 +18,24 @@ export async function storefrontAPI(query: string, variables?: object) {
 	return response.json()
 }
 
-export type ProductItemType = {
-	node: {
-		title: string
-		description: string
-		handle: string
-		priceRange: {
-			minVariantPrice: {
-				amount: string
-			}
-		}
-		images: {
-			edges: ProductItemImageType[]
+export type SingleProduct = {
+	title: string
+	description: string
+	handle: string
+	tags: string[]
+	updatedAt?: string
+	priceRange: {
+		minVariantPrice: {
+			amount: number
 		}
 	}
+	images: {
+		edges: ProductItemImageType[]
+	}
+}
+
+export type ProductNodeType = {
+	node: SingleProduct
 }
 
 export type ProductItemImageType = {
@@ -41,8 +45,12 @@ export type ProductItemImageType = {
 	}
 }
 
-export type ProductItemResponseType = {
+export type ManyProductsResponseType = {
 	products: {
-		edges: ProductItemType[]
+		edges: ProductNodeType[]
 	}
+}
+
+export type SingleProductResponseType = {
+	productByHandle: SingleProduct
 }

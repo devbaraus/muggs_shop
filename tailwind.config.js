@@ -1,7 +1,14 @@
 module.exports = {
 	content: ['./app/**/*.{ts,tsx,jsx,js}'],
 	theme: {
-		extend: {},
+		extend: {
+			fontFamily: {
+				inter: ['Inter', 'sans-serif'],
+			},
+		},
 	},
-	plugins: [],
+	plugins: [
+		require('@tailwindcss/aspect-ratio'),
+		require('@tailwindcss/typography'),
+	],
 }
