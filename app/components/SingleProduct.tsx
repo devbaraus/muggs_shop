@@ -26,6 +26,7 @@ export default function SingleProduct({ data }: Props) {
 		})
 		const { webUrl } = data.checkoutCreate.checkout
 		window.open(webUrl, '_blank')?.focus()
+		setIsLoading(false)
 	}
 
 	return (
