@@ -11,7 +11,6 @@ import {
 } from '@heroicons/react/outline';
 import { StoreContext } from '~/context/StoreContext';
 import ProductImageCarousel from '~/components/ProductImageCarousel';
-import { MetaFunction } from 'remix';
 
 type Props = {
 	data: SingleProductResponseType;

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useSwipeable } from 'react-swipeable';
 
 type ProductImage = {
 	transformedSrc: string;
@@ -13,10 +12,6 @@ type Props = {
 
 export default function ProductImageCarousel({ images, className }: Props) {
 	const [currentSlide, setCurrentSlide] = useState<number>(0);
-	const handlersSwipe = useSwipeable({
-		onSwipedLeft: () => nextSlide(),
-		onSwipedRight: () => prevSlide(),
-	});
 	let t: NodeJS.Timeout | null = null;
 
 	function slideClearTimeout() {
@@ -57,7 +52,6 @@ export default function ProductImageCarousel({ images, className }: Props) {
 							<img
 								src={img.transformedSrc}
 								alt={img.altText}
-								{...handlersSwipe}
 								key={index}
 								className={`object-center object-contain unselectable ${
 									index == currentSlide ? 'block' : 'hidden'
