@@ -1,4 +1,4 @@
-const gql = String.raw
+const gql = String.raw;
 
 export const queryProducts = (count: number = 6) => gql`
     query Products {
@@ -26,7 +26,7 @@ export const queryProducts = (count: number = 6) => gql`
             }
         }
     }
-`
+`;
 
 export const querySingleProduct = (countImages: number = 6) => gql`
     query SingleProduct($handle: String!) {
@@ -58,4 +58,4 @@ export const querySingleProduct = (countImages: number = 6) => gql`
             }
         }
     }
-`
+`;
