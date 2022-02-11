@@ -3,9 +3,9 @@ import { formatPrice } from '~/utils'
 import { ManyProductsResponseType } from '~/services/storefront'
 
 type Props = {
-	className?: string
-	data: ManyProductsResponseType
-}
+	className?: string;
+	data: ManyProductsResponseType;
+};
 
 export default function ProductGrid({ data, className }: Props) {
 	const { products } = data

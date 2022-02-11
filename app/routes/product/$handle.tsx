@@ -7,24 +7,24 @@ import { Link } from '@remix-run/react'
 
 export const loader: LoaderFunction = async ({ params }) => {
 	const store = new Storefront()
-	const { data: singleProduct } = await store.fetch(
-		querySingleProduct(),
-		{
-			handle: params.handle,
-		})
+	const { data: singleProduct } = await store.fetch(querySingleProduct(), {
+		handle: params.handle,
+	})
 	const { data: products } = await store.fetch(queryProducts(7))
 
 	return { singleProduct, products }
 }
 
-type Props = {}
+type Props = {};
 
 export default function ProductItem({}: Props) {
 	const { singleProduct, products } = useLoaderData()
 	const recomendationProducts: ManyProductsResponseType = {
 		products: {
-			edges: products
-				.products.edges.filter(({ node }: ProductNodeType) => node.handle !== singleProduct.productByHandle.handle),
+			edges: products.products.edges.filter(
+				({ node }: ProductNodeType) =>
+					node.handle !== singleProduct.productByHandle.handle,
+			),
 		},
 	}
 

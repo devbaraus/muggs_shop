@@ -4,6 +4,8 @@ import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useLoaderD
 import styles from './styles/tailwind.css'
 import Header from '~/components/sections/Header'
 import { Footer } from '~/components/sections/Footer'
+import StoreProvider from '~/context/StoreContext'
+import CartCheckout from '~/components/CartCheckout'
 
 export function links() {
 	return [
@@ -12,7 +14,7 @@ export function links() {
 		{ rel: 'preconnect', href: 'https://fonts.gstatic.com' },
 		{
 			rel: 'stylesheet',
-			href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap',
+			href: 'https://fonts.googleapis.com/css2?family=Inter:wght@100;400;500&display=swap',
 		},
 	]
 }
@@ -42,16 +44,17 @@ export default function App() {
 			<Links />
 		</head>
 		<body className='scroll-smooth font-inter'>
-		<Header />
-		<Outlet />
+		<StoreProvider>
+			<Header />
+			<CartCheckout />
+			<Outlet />
+			<Footer />
+		</StoreProvider>
 		<script
 			dangerouslySetInnerHTML={{
-				__html: `window.ENV = ${JSON.stringify(
-					data.ENV,
-				)}`,
+				__html: `window.ENV = ${JSON.stringify(data.ENV)}`,
 			}}
 		/>
-		<Footer />
 		<ScrollRestoration />
 		<Scripts />
 		{process.env.NODE_ENV === 'development' && <LiveReload />}

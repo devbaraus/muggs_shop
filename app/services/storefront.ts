@@ -1,7 +1,7 @@
 type StorefrontConfig = {
-	STOREFRONT_API_URL: string
-	STOREFRONT_ACCESS_TOKEN: string
-}
+	STOREFRONT_API_URL: string;
+	STOREFRONT_ACCESS_TOKEN: string;
+};
 
 export class Storefront {
 	private config: StorefrontConfig = {
@@ -11,8 +11,9 @@ export class Storefront {
 
 	public constructor(API_URL: string = '', ACCESS_TOKEN: string = '') {
 		this.config = {
-			STOREFRONT_API_URL: API_URL || process.env.STOREFRONT_API_URL as string,
-			STOREFRONT_ACCESS_TOKEN: ACCESS_TOKEN || process.env.STOREFRONT_ACCESS_TOKEN as string,
+			STOREFRONT_API_URL: API_URL || (process.env.STOREFRONT_API_URL as string),
+			STOREFRONT_ACCESS_TOKEN:
+				ACCESS_TOKEN || (process.env.STOREFRONT_ACCESS_TOKEN as string),
 		}
 	}
 
@@ -21,7 +22,8 @@ export class Storefront {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				'X-Shopify-Storefront-Access-Token': this.config.STOREFRONT_ACCESS_TOKEN,
+				'X-Shopify-Storefront-Access-Token':
+				this.config.STOREFRONT_ACCESS_TOKEN,
 			},
 			body: JSON.stringify({ query, variables }),
 		})
@@ -31,47 +33,48 @@ export class Storefront {
 }
 
 export type SingleProduct = {
-	title: string
-	description: string
-	handle: string
-	tags: string[]
-	updatedAt?: string
+	title: string;
+	description: string;
+	handle: string;
+	tags: string[];
+	updatedAt?: string;
+	quantity?: number;
 	priceRange: {
 		minVariantPrice: {
-			amount: number
-		}
-	}
+			amount: number;
+		};
+	};
 	images: {
-		edges: ProductItemImageType[]
-	}
+		edges: ProductItemImageType[];
+	};
 	variants?: {
-		edges: ProductVariantType[]
-	}
-}
+		edges: ProductVariantType[];
+	};
+};
 
 export type ProductVariantType = {
 	node: {
-		id: string
-	}
-}
+		id: string;
+	};
+};
 
 export type ProductNodeType = {
-	node: SingleProduct
-}
+	node: SingleProduct;
+};
 
 export type ProductItemImageType = {
 	node: {
-		transformedSrc: string
-		altText: string
-	}
-}
+		transformedSrc: string;
+		altText: string;
+	};
+};
 
 export type ManyProductsResponseType = {
 	products: {
-		edges: ProductNodeType[]
-	}
-}
+		edges: ProductNodeType[];
+	};
+};
 
 export type SingleProductResponseType = {
-	productByHandle: SingleProduct
-}
+	productByHandle: SingleProduct;
+};

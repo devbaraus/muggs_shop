@@ -1,13 +1,8 @@
 const gql = String.raw
 
 export const mutationCreateCheckout = () => gql`
-    mutation CreateCheckout($variantId: ID!, $quantity: Int!){
-        checkoutCreate(input: {
-            lineItems: {
-                variantId: $variantId,
-                quantity: $quantity
-            }
-        }) {
+    mutation CreateCheckout($input: CheckoutCreateInput!) {
+        checkoutCreate(input: $input) {
             checkout {
                 webUrl
             }

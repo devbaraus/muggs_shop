@@ -1,4 +1,4 @@
-type Props = {}
+type Props = {};
 
 export function Hero({}: Props) {
 	return (
