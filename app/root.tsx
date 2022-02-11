@@ -28,7 +28,25 @@ export function links() {
 }
 
 export const meta: MetaFunction = () => {
-	return { title: 'Muggs Shop' };
+	return {
+		title: 'Muggs Shop',
+		description: 'Loja fictícia para venda de canecas personalizadas.',
+		keywords: [
+			'canecas',
+			'personalizadas',
+			'loja',
+			'anime',
+			'pokemon',
+			'tv show',
+			'mugs',
+		].join(', '),
+		'twitter:card': 'summary_large_image',
+		'twitter:creator': `@devbaraus`,
+		'twitter:site': `baraus.dev`,
+		'twitter:title': `Muggs Shop`,
+		'twitter:description':
+			'Loja fictícia para venda de canecas personalizadas.',
+	};
 };
 
 export async function loader() {

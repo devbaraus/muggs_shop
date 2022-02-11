@@ -13,7 +13,7 @@ export default function Header({}: Props) {
 			<header className="max-w-7xl mx-auto sm:px-6 lg:px-8">
 				<div className="border-b border-gray-200 px-4 sm:px-0">
 					<div className="h-16 flex items-center justify-between">
-						<div className="flex-1 flex">
+						<div className="flex">
 							<Link to="/">
 								<a className="flex items-center">
 									<HandIcon className="w-10 h-10 text-purple-600" />

@@ -1,7 +1,8 @@
-import { LoaderFunction, useLoaderData } from 'remix';
+import { LoaderFunction, MetaFunction, useLoaderData } from 'remix';
 import {
 	ManyProductsResponseType,
 	ProductNodeType,
+	SingleProductResponseType,
 	Storefront,
 } from '~/services/storefront';
 import { queryProducts, querySingleProduct } from '~/graphql/query';
@@ -17,6 +18,24 @@ export const loader: LoaderFunction = async ({ params }) => {
 	const { data: products } = await store.fetch(queryProducts(7));
 
 	return { singleProduct, products };
+};
+
+export const meta: MetaFunction = ({
+	data,
+}: {
+	data: { singleProduct: SingleProductResponseType };
+}) => {
+	const { productByHandle: product } = data.singleProduct;
+	return {
+		title: `Muggs Shop | ${product.title}`,
+		description: product.description,
+		keywords: product.tags.join(', '),
+		'twitter:card': 'summary_large_image',
+		'twitter:creator': `@devbaraus`,
+		'twitter:site': `baraus.dev`,
+		'twitter:title': `Muggs Shop | ${product.title}`,
+		'twitter:description': product.description,
+	};
 };
 
 type Props = {};

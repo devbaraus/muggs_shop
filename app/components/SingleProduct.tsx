@@ -10,6 +10,8 @@ import {
 	ShoppingCartIcon,
 } from '@heroicons/react/outline';
 import { StoreContext } from '~/context/StoreContext';
+import ProductImageCarousel from '~/components/ProductImageCarousel';
+import { MetaFunction } from 'remix';
 
 type Props = {
 	data: SingleProductResponseType;
@@ -21,7 +23,7 @@ export default function SingleProduct({ data }: Props) {
 	const { updateCartItem } = useContext(StoreContext);
 
 	const { productByHandle: product } = data;
-	const image = product.images.edges[0].node;
+	const images = product.images.edges.map((item) => item.node);
 	const variantId = product.variants?.edges[0].node.id;
 
 	async function handleCheckoutProduct(
@@ -61,13 +63,7 @@ export default function SingleProduct({ data }: Props) {
 		<>
 			<div className="lg:grid lg:grid-cols-7 lg:gap-x-8 xl:gap-x-16">
 				<div className="lg:col-span-4">
-					<div className="aspect-w-4 aspect-h-4 rounded-lg bg-gray-100 overflow-hidden">
-						<img
-							src={image.transformedSrc}
-							alt={image.altText}
-							className="object-center object-cover"
-						/>
-					</div>
+					<ProductImageCarousel images={images} />
 				</div>
 				<div className="max-w-2xl mx-auto mt-14 sm:mt-16 lg:max-w-none lg:mt-0 lg:col-span-3">
 					<div className="flex flex-col-reverse">

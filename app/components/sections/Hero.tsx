@@ -8,10 +8,12 @@ export function Hero({}: Props) {
 					Compre lindas canecas personalizadas
 				</h1>
 				<p className="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
-					Take your digital products to another level with our collection of UI
-					kits, templates and icon sets. All our assets were carefully designed
-					to work together beautifully. We have obsessed over every little
-					detail, and we really believe it shows.
+					Eleve seu humor à outro nível com nossas canecas personalizadas.
+					Nossas canecas são feitas de porcelana altamente resistente, são
+					perfeitas para deliciar sua bebida preferida, seja quentinha ou
+					gelada! Além disso, elas podem ser usadas até mesmo como item de
+					decoração, porta canetas, porta treco, porta objetos ou do jeito que
+					você preferir.
 				</p>
 				{/*<div className='mt-5 max-w-md mx-auto flex justify-center md:mt-8'>*/}
 				{/*	<div className='rounded-md shadow'>*/}
